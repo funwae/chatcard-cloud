@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ChatCard – Your Portable AI Identity</title>
+  <meta
+    name="description"
+    content="ChatCard is a portable AI identity that lets you carry your preferences, persona, and permissions with you across AI-enabled apps and sites."
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <header class="cc-header">
+    <div class="cc-header-inner">
+      <!-- Replace with ChatCard logo / card mark -->
+      <div class="cc-logo" aria-label="ChatCard logo">ChatCard</div>
+      <nav class="cc-nav">
+        <a href="#about">What it is</a>
+        <a href="#people">For people</a>
+        <a href="#developers">For developers</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#trust">Trust &amp; control</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#get-card" class="cc-btn cc-btn-outline">Get your card</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="cc-hero">
+      <div class="cc-hero-inner">
+        <h1>ChatCard is your portable AI identity.</h1>
+        <p class="cc-hero-subtitle">
+          One card that carries your AI persona, preferences, and permissions with you—so any AI-enabled app or site can
+          recognize you and work the way you like, with your consent.
+        </p>
+        <div class="cc-hero-actions">
+          <a href="#get-card" class="cc-btn cc-btn-primary">Get your ChatCard</a>
+          <a href="#developers" class="cc-btn cc-btn-secondary">Integrate ChatCard</a>
+        </div>
+        <p class="cc-hero-meta">
+          A neutral, open standard for “bring-your-own-AI” identity.<br />
+          Designed for the next wave of AI-enabled content on the web.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section id="about" class="cc-section cc-about">
+      <div class="cc-section-inner">
+        <h2>What is ChatCard?</h2>
+        <p>
+          ChatCard is a digital identity card for your AI presence. It doesn’t log you into sites—it tells AI systems who you are,
+          how you like to interact, and what they’re allowed to do on your behalf.
+        </p>
+        <p>
+          A ChatCard can carry:
+        </p>
+        <ul>
+          <li><strong>Your AI persona</strong> – language, tone, formality, accessibility preferences.</li>
+          <li><strong>Your model choices</strong> – preferred providers or models, where supported.</li>
+          <li><strong>Your permissions</strong> – which actions AIs can take for you on a given site.</li>
+          <li><strongYour privacy stance</strong> – how your data can be logged, stored, or used for training.</li>
+        </ul>
+        <p>
+          When a site supports ChatCard, your AI doesn’t start from scratch. It meets you as <em>you</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOR PEOPLE -->
+    <section id="people" class="cc-section cc-people">
+      <div class="cc-section-inner">
+        <h2>For people who use AI everywhere</h2>
+        <p>
+          Today, every new AI app asks you to re-teach it who you are. ChatCard is a simple way to carry a consistent AI presence
+          with you instead.
+        </p>
+
+        <div class="cc-people-grid">
+          <article class="cc-card">
+            <h3>One persona, many places</h3>
+            <p>
+              Set your preferred language, tone, and style once. Sites that support ChatCard can honor those preferences without
+              you reconfiguring every time.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>Keep your AI on your side</h3>
+            <p>
+              A ChatCard tells AI what it’s <em>allowed</em> to do: read pages, fill forms, call actions, or just summarize. You
+              decide the scope per site.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>Stay in control</h3>
+            <p>
+              You can see which sites you’ve connected, what permissions they have, and revoke them with a click. Your card is
+              yours—not any one company’s lock-in.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>Bring your history</h3>
+            <p>
+              Over time, ChatCard can link to trails of your past AI-assisted work (stored where you choose), so new apps can
+              help you pick up where you left off.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOR DEVELOPERS / PLATFORMS -->
+    <section id="developers" class="cc-section cc-developers">
+      <div class="cc-section-inner">
+        <h2>For developers and platforms</h2>
+        <p>
+          ChatCard gives you a standard way to welcome “bring-your-own-AI” users without inventing your own identity protocol.
+        </p>
+
+        <div class="cc-dev-grid">
+          <article class="cc-card">
+            <h3>Offer a better first-run experience</h3>
+            <p>
+              When a new user lands with a ChatCard, you already know their language, tone, and accessibility preferences. You can
+              personalize safely from the first interaction.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>Standardized AI permissions</h3>
+            <p>
+              Use ChatCard scopes to define what user AIs can do on your site: read-only, suggest-only, or act-with-confirmation.
+              No bespoke auth dance required.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>AI-enabled content, consistently</h3>
+            <p>
+              Combine ChatCard with “AI-enabled content” metadata to expose structure and actions in a machine-readable way. Any
+              compatible AI can understand your pages without brittle scraping.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>Provider-neutral</h3>
+            <p>
+              ChatCard doesn’t bind you to a single model vendor. It’s an identity and contract layer; you decide which AI
+              backends you support.
+            </p>
+          </article>
+        </div>
+
+        <p class="cc-dev-cta">
+          SDKs and example integrations will live at <code>/docs</code> and <code>/examples</code> as the standard evolves.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="cc-section cc-how">
+      <div class="cc-section-inner">
+        <h2>How ChatCard works</h2>
+        <p>
+          ChatCard is designed to feel simple for users and straightforward for developers, while staying flexible enough to
+          support different AI stacks.
+        </p>
+
+        <div class="cc-how-grid">
+          <article class="cc-card">
+            <h3>1. You create your card</h3>
+            <p>
+              On chatcard.cloud (or within a compatible app), you set up your profile:
+            </p>
+            <ul>
+              <li>Language(s) and preferred tone.</li>
+              <li>Accessibility preferences and content style.</li>
+              <li>Optional model preferences.</li>
+            </ul>
+            <p>
+              You get a secure, portable card—represented as a signed profile that lives in your control.
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>2. A site advertises ChatCard support</h3>
+            <p>
+              AI-enabled sites announce support for ChatCard via a standard header or meta tag. Your browser or companion app
+              can then offer: “Use your ChatCard here?”
+            </p>
+          </article>
+
+          <article class="cc-card">
+            <h3>3. You grant scoped access</h3>
+            <p>
+              If you say yes, the site receives a scoped token with:
+            </p>
+            <ul>
+              <li>A pseudonymous identifier.</li>
+              <li>Your AI preferences relevant to that site.</li>
+              <li>The permissions you granted (e.g., read-only, suggest, act-with-confirmation).</li>
+            </ul>
+          </article>
+
+          <article class="cc-card">
+            <h3>4. Your AI goes to work</h3>
+            <p>
+              The site (or your own AI agent running client-side) uses this information to:
+            </p>
+            <ul>
+              <li>Render summaries and helpers in your style.</li>
+              <li>Interact with AI-enabled content on the page using exposed actions.</li>
+              <li>Respect your limits and privacy settings.</li>
+            </ul>
+          </article>
+
+          <article class="cc-card">
+            <h3>5. You stay in control</h3>
+            <p>
+              From your ChatCard dashboard, you can:
+            </p>
+            <ul>
+              <li>See which sites have access.</li>
+              <li>Adjust or revoke permissions.</li>
+              <li>Rotate keys or reset your card if needed.</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="cc-how-summary">
+          Under the hood, ChatCard can use familiar identity technologies (JWT, OAuth/OIDC-style flows). On the surface, it’s just
+          your AI showing up already on your side.
+        </p>
+      </div>
+    </section>
+
+    <!-- TRUST & CONTROL -->
+    <section id="trust" class="cc-section cc-trust">
+      <div class="cc-section-inner">
+        <h2>Trust, safety, and control</h2>
+        <p>
+          ChatCard is about giving people more control over how AI acts on their behalf—not less. The standard is being designed
+          with a few non-negotiable principles:
+        </p>
+        <ul>
+          <li>
+            <strong>You first.</strong> Your card exists to represent your preferences and limits, not to give unlimited power to
+            apps or AIs.
+          </li>
+          <li>
+            <strong>Consent by design.</strong> Connections to new sites are explicit. Scopes are visible and revocable.
+          </li>
+          <li>
+            <strong>Provider-neutral.</strong> ChatCard doesn’t lock you into any one AI vendor or platform.
+          </li>
+          <li>
+            <strong>Clear contracts.</strong> Sites declare what they want AIs to do; your card declares what you allow. Anything
+            beyond that is out of bounds.
+          </li>
+        </ul>
+        <p>
+          As the spec matures, we expect to work with partners on independent audits, open documentation, and interoperable
+          implementations.
+        </p>
+      </div>
+    </section>
+
+    <!-- GET CARD (placeholder for future) -->
+    <section id="get-card" class="cc-section cc-get-card">
+      <div class="cc-section-inner">
+        <h2>Get your ChatCard</h2>
+        <p>
+          ChatCard is in active design and early prototyping. The first version will focus on a simple, privacy-respecting way to
+          carry a basic AI persona and permissions between a small set of early partner sites.
+        </p>
+        <p>
+          If you’d like to be notified when the first cards are available—or if you want to test as an early adopter—leave your
+          contact below.
+        </p>
+        <p class="cc-contact-details">
+          Contact: <strong>[your contact details or signup form]</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="cc-section cc-faq">
+      <div class="cc-section-inner">
+        <h2>Frequently asked questions</h2>
+
+        <article class="cc-faq-item">
+          <h3>Is ChatCard a product, a standard, or both?</h3>
+          <p>
+            ChatCard starts as an <strong>open standard</strong> for portable AI identity, with a reference implementation at
+            chatcard.cloud. Other apps and platforms can implement compatible cards if they follow the spec.
+          </p>
+        </article>
+
+        <article class="cc-faq-item">
+          <h3>Does ChatCard replace my login?</h3>
+          <p>
+            No. ChatCard is about how AI recognizes and acts for you—not about account authentication. It can coexist with your
+            existing login system.
+          </p>
+        </article>
+
+        <article class="cc-faq-item">
+          <h3>Do I need to pick one AI provider?</h3>
+          <p>
+            No. ChatCard is provider-neutral. It can express preferences, but it doesn’t lock you or developers into a specific
+            vendor.
+          </p>
+        </article>
+
+        <article class="cc-faq-item">
+          <h3>How does this relate to EarthCloud and Funwae?</h3>
+          <p>
+            ChatCard is being designed in the same ecosystem as
+            <a href="https://earthcloud.co" target="_blank" rel="noopener noreferrer">EarthCloud</a> (intent &amp; trails) and
+            <a href="https://funwae.com" target="_blank" rel="noopener noreferrer">Funwae</a> (atmosphere studio), but the goal is
+            a standard that any stack can adopt.
+          </p>
+        </article>
+
+        <article class="cc-faq-item">
+          <h3>Can my product or platform help shape the spec?</h3>
+          <p>
+            Yes. If you’re building AI-enabled content, browsers, or agent frameworks and want to collaborate on the ChatCard
+            standard, please reach out.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="cc-section cc-contact">
+      <div class="cc-section-inner">
+        <h2>Stay in the loop</h2>
+        <p>
+          ChatCard is early, but the need it addresses is already here. If you’d like to help shape a portable AI identity
+          standard—from the user side or the developer side—we’d love to hear from you.
+        </p>
+        <p class="cc-contact-details">
+          Contact: <strong>[your contact details]</strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cc-footer">
+    <div class="cc-footer-inner">
+      <div class="cc-footer-logo">ChatCard</div>
+      <p>A portable AI identity concept originating from the Funwae ecosystem.</p>
+      <p>© 2025 ChatCard / chatcard.cloud. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
