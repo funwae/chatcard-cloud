@@ -32,7 +32,7 @@ export default function Header() {
           />
           <span>ChatCard</span>
         </Link>
-        <nav className="cc-nav hidden md:flex items-center gap-6">
+        <nav className="cc-nav hidden lg:flex items-center gap-6">
           <a href="#why" className="text-cc-text-muted hover:text-cc-text transition-colors">
             Why ChatCard
           </a>
@@ -51,7 +51,7 @@ export default function Header() {
             Get your ChatCard
           </Link>
           <button
-            className="md:hidden p-2 text-cc-text-muted hover:text-cc-text"
+            className="lg:hidden p-2 text-cc-text-muted hover:text-cc-text"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -66,7 +66,7 @@ export default function Header() {
         </div>
       </div>
       {mobileMenuOpen && (
-        <nav className="cc-nav-mobile md:hidden border-t border-cc-border bg-cc-surface/95 backdrop-blur-sm">
+        <nav className="cc-nav-mobile lg:hidden border-t border-cc-border bg-cc-surface/95 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
             <a href="#why" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
               Why ChatCard

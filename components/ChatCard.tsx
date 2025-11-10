@@ -91,6 +91,15 @@ export const ChatCard: React.FC<ChatCardProps> = ({
             {/* Card header with microcopy */}
             <div className="flex items-center justify-between gap-3 mb-1">
               <div className="flex items-center gap-3">
+                <Image
+                  src="/chatcard-logo.svg"
+                  alt=""
+                  width={32}
+                  height={32}
+                  className={`${isDark ? 'invert' : 'invert-0'}`}
+                  unoptimized
+                  aria-hidden="true"
+                />
                 {profile.avatarUrl ? (
                   <Image
                     src={profile.avatarUrl}
