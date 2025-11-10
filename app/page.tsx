@@ -86,7 +86,7 @@ const demoProfile: ChatCardProfile = {
   handle: '@alex',
   primaryLanguage: 'en',
   secondaryLanguages: ['es', 'fr'],
-  tone: 'calm',
+  tone: 'casual',
   readingLevel: 'standard',
   accessibility: { largeText: true, highContrast: false },
   modelPreferences: { provider: 'open', model: 'balanced' },

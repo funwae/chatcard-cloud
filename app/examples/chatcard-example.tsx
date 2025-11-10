@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useState } from 'react';
-import { ChatCard } from '../components/ChatCard';
+import { ChatCard } from '../../components/ChatCard';
 import {
   ChatCardProfile,
   ChatCardScope,
   ChatCardStatus,
-} from '../types/chatcard';
+} from '../../types/chatcard';
 
 const profile: ChatCardProfile = {
   id: 'card_01HX9ZK0ABCDEF',

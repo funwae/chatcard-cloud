@@ -87,7 +87,7 @@ export interface ChatCardPageSpec {
 // Window global for page specs
 declare global {
   interface Window {
-    chatcard?: ChatCardPageSpec;
+    chatcardPageSpec?: ChatCardPageSpec;
   }
 }
 
