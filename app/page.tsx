@@ -35,8 +35,8 @@ const whyPoints = [
     description: 'Link the AI provider you trust. Carditecture routes actions to that provider without locking you into anyone&apos;s UI.',
   },
   {
-    title: 'Structured events with consent',
-    description: 'Providers receive a consistent event stream--what card acted, where, and with what scope--without scraping random logs.',
+    title: 'You own your card, you control consent',
+    description: 'Your ChatCard is yours. You decide which apps can use it, what actions they can request, and what permissions you grant. Every connection requires your explicit consent, and you can revoke access anytime.',
   },
 ]
 
@@ -46,7 +46,8 @@ const howSteps = [
     summary: 'You carry a ChatCard with your name, avatar, languages, tone, and permissions.',
     bullets: [
       'Link it to the AI provider you trust.',
-      'Decide how far your AI can go on each surface.',
+      'You choose what actions the card can take, app by app.',
+      'Every permission requires your explicit consent.',
     ],
   },
   {
@@ -70,7 +71,7 @@ const howSteps = [
 const providerPoints = [
   'Plug into Carditecture once and appear anywhere a ChatCard does.',
   'Receive structured, user-consented events that keep context clean.',
-  'Let the card handle consent, presentation, and language preferences.',
+  'Users own their cards and grant explicit permissions--you just receive clean, consented usage data.',
 ]
 
 const builderPoints = [
@@ -168,6 +169,9 @@ export default function Home() {
               <p className="text-lg text-cc-text-muted">
                 ChatCard is a portable chat card you can carry across apps and sites. It remembers how you talk, links to the AI you
                 trust, and clicks into AI-enabled content through Carditecture.
+              </p>
+              <p className="text-base font-semibold text-cc-text">
+                You choose what actions the card can take, app by app.
               </p>
               <p className="text-base text-cc-text-muted">
                 Instead of starting over in every product, you bring one card--with your name, tone, and history--and let apps plug into it.
@@ -267,8 +271,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a href="#get-card" className="cc-btn cc-btn-secondary w-fit">
-                Provider docs (soon)
+              <a href="mailto:hello@chatcard.cloud?subject=Provider Early Access" className="cc-btn cc-btn-secondary w-fit">
+                Provider docs (join early list)
               </a>
             </div>
             <div className="cc-card space-y-4 p-6">
