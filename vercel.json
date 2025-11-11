@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "git config --global user.name 'Hayden' && git config --global user.email 'hayden@funwae.com' && npm run build",
   "framework": "nextjs"
 }
+
 
 
 
