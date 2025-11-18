@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @chatcard/proof build && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
-  "outputDirectory": ".next",
+  "buildCommand": "cd ../.. && pnpm install && turbo run build --filter=@chatcard/web",
+  "outputDirectory": "apps/chatcard-web/.next",
   "installCommand": "cd ../.. && pnpm install",
   "framework": "nextjs",
   "rewrites": [

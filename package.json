@@ -5,14 +5,16 @@
   "scripts": {
     "dev:web": "pnpm --filter @chatcard/web dev:3002",
     "dev:api": "pnpm --filter @chatcard/api dev",
-    "build": "pnpm -r build",
-    "build:web": "pnpm --filter @chatcard/web build",
-    "build:api": "pnpm --filter @chatcard/api build",
-    "build:proof": "pnpm --filter @chatcard/proof build",
-    "lint": "pnpm -r lint",
-    "typecheck": "pnpm -r typecheck"
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=@chatcard/web",
+    "build:api": "turbo run build --filter=@chatcard/api",
+    "build:proof": "turbo run build --filter=@chatcard/proof",
+    "db:generate": "turbo run db:generate",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
+    "turbo": "^2.6.1",
     "typescript": "^5.3.3"
   }
 }
