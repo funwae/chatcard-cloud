@@ -2,6 +2,7 @@
   "name": "chatcard-monorepo",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.21.0",
   "scripts": {
     "dev:web": "pnpm --filter @chatcard/web dev:3002",
     "dev:api": "pnpm --filter @chatcard/api dev",
