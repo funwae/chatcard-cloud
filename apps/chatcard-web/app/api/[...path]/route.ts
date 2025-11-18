@@ -21,7 +21,7 @@ async function getExpressHandler() {
   }
 
   try {
-    // Try to import from source (for Vercel build)
+    // Import from built dist folder (API is built by Turborepo before web build)
     // The path is relative to apps/chatcard-web/app/api/[...path]/route.ts
     // Path from apps/chatcard-web/app/api/[...path]/route.ts
     // Up to apps/chatcard-web/app/api/[...path] (../)
@@ -29,9 +29,9 @@ async function getExpressHandler() {
     // Up to apps/chatcard-web/app (../)
     // Up to apps/chatcard-web (../)
     // Up to apps (../)
-    // Then into chatcard-api/src/serverless.js
-    // So: ../../../chatcard-api/src/serverless.js
-    const module = await import('../../../chatcard-api/src/serverless.js');
+    // Then into chatcard-api/dist/serverless.js
+    // So: ../../../chatcard-api/dist/serverless.js
+    const module = await import('../../../chatcard-api/dist/serverless.js');
     cachedHandler = module.handler;
     return cachedHandler;
   } catch (error) {
