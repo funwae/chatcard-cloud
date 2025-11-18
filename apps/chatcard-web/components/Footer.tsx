@@ -25,15 +25,33 @@ export default function Footer() {
           <a href="#how" className="hover:text-cc-text transition-colors">
             How
           </a>
+          <a href="#vibetribe" className="hover:text-cc-text transition-colors">
+            VibeTribe
+          </a>
+          <a href="#proofs" className="hover:text-cc-text transition-colors">
+            Proofs
+          </a>
           <a href="#providers" className="hover:text-cc-text transition-colors">
             Providers
           </a>
           <a href="#builders" className="hover:text-cc-text transition-colors">
             Builders
           </a>
-          <a href="#get-card" className="hover:text-cc-text transition-colors">
-            Get your card
-          </a>
+          <Link href="/docs" className="hover:text-cc-text transition-colors">
+            Docs
+          </Link>
+          <Link href="/vibetribe" className="hover:text-cc-text transition-colors">
+            VibeTribe Designer
+          </Link>
+          <Link href="/onboarding" className="hover:text-cc-text transition-colors">
+            Onboarding
+          </Link>
+          <Link href="/privacy" className="hover:text-cc-text transition-colors">
+            Privacy
+          </Link>
+          <Link href="/terms" className="hover:text-cc-text transition-colors">
+            Terms
+          </Link>
         </div>
         <p className="mt-6 text-xs uppercase tracking-[0.3em] text-cc-text-muted">
           powered by <span className="text-cc-text">glyphd labs</span>

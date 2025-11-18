@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { sign, embedHtml, embedSvg } from '@chatcard/proof';
 import { AnchorButton } from '@/components/AnchorButton';
 import { CosignRequest } from '@/components/CosignRequest';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function ProofStudioPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -80,9 +82,11 @@ export default function ProofStudioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cc-bg">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-cc-text mb-8">Proof Studio</h1>
+    <>
+      <Header />
+      <div className="min-h-screen bg-cc-bg">
+        <div className="max-w-4xl mx-auto px-6 py-12">
+          <h1 className="text-4xl font-bold text-cc-text mb-8">Proof Studio</h1>
 
         <div className="space-y-6">
           <div>
@@ -157,8 +161,10 @@ export default function ProofStudioPage() {
             </div>
           )}
         </div>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

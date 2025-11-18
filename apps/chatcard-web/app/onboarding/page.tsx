@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -31,8 +33,10 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cc-bg">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+    <>
+      <Header />
+      <div className="min-h-screen bg-cc-bg">
+        <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-cc-text mb-2">Welcome to ChatCard</h1>
           <p className="text-cc-text-muted">
@@ -163,8 +167,10 @@ export default function OnboardingPage() {
             </div>
           </div>
         )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

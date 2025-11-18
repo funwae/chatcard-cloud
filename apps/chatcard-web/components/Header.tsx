@@ -39,14 +39,20 @@ export default function Header() {
           <a href="#how" className="text-cc-text-muted hover:text-cc-text transition-colors">
             How it works
           </a>
+          <a href="#vibetribe" className="text-cc-text-muted hover:text-cc-text transition-colors">
+            VibeTribe
+          </a>
+          <a href="#proofs" className="text-cc-text-muted hover:text-cc-text transition-colors">
+            Proofs
+          </a>
           <a href="#providers" className="text-cc-text-muted hover:text-cc-text transition-colors">
             For providers
           </a>
           <a href="#builders" className="text-cc-text-muted hover:text-cc-text transition-colors">
             For builders
           </a>
-          <Link href="/vibetribe" className="text-cc-text-muted hover:text-cc-text transition-colors">
-            VibeTribe
+          <Link href="/docs" className="text-cc-text-muted hover:text-cc-text transition-colors">
+            Docs
           </Link>
         </nav>
         <div className="flex items-center gap-4">
@@ -77,14 +83,20 @@ export default function Header() {
             <a href="#how" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
               How it works
             </a>
+            <a href="#vibetribe" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              VibeTribe
+            </a>
+            <a href="#proofs" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              Proofs
+            </a>
             <a href="#providers" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
               For providers
             </a>
             <a href="#builders" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
               For builders
             </a>
-            <Link href="/vibetribe" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
-              VibeTribe
+            <Link href="/docs" className="text-cc-text-muted hover:text-cc-text transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              Docs
             </Link>
             <Link href="#get-card" className="cc-btn cc-btn-outline text-sm mt-2" onClick={() => setMobileMenuOpen(false)}>
               Get your ChatCard

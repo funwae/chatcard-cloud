@@ -1,6 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 type VibeEnergy = 'low' | 'medium' | 'high';
 
@@ -291,8 +293,10 @@ export default function VibeTribePage() {
   const chatCardJson = useMemo(() => buildChatCardExtension(room), [room]);
 
   return (
-    <div className="min-h-screen bg-cc-bg">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <>
+      <Header />
+      <div className="min-h-screen bg-cc-bg">
+        <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-cc-text mb-2">
             VibeTribe Designer
@@ -473,7 +477,8 @@ export default function VibeTribePage() {
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

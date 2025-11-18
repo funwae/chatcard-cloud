@@ -183,6 +183,9 @@ export default function Home() {
                 <a href="#how" className="cc-btn cc-btn-secondary">
                   See how Carditecture works
                 </a>
+                <a href="/onboarding" className="cc-btn cc-btn-secondary">
+                  Quick Start
+                </a>
               </div>
               <div className="grid gap-4 pt-2 sm:grid-cols-2">
                 {heroHighlights.map((item) => (
@@ -327,6 +330,119 @@ export default function Home() {
               </ul>
               <a href="#get-card" className="cc-btn cc-btn-primary w-fit">
                 Join early builders
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="vibetribe" className="cc-section bg-white/60">
+          <div className="cc-section-inner space-y-10">
+            <div className="max-w-3xl space-y-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cc-text-muted">VIBETRIBE</p>
+              <h2 className="text-3xl font-semibold text-cc-text sm:text-4xl">Design Vibe Tribes</h2>
+              <p className="text-lg text-cc-text-muted">
+                VibeTribes are temporary, problem-focused collaboration spaces. They&apos;re constructed{' '}
+                <strong className="text-cc-text">per problem, not per lifetime</strong>—so identity is soft, and collaboration is fluid.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <article className="cc-card p-6">
+                <h3 className="text-xl font-semibold text-cc-text mb-3">Tribe per problem, not per lifetime</h3>
+                <p className="text-base text-cc-text-muted mb-4">
+                  Instead of joining one big identity-tribe and staying there forever, you flow through many short-lived, purpose-built vibe tribes.
+                </p>
+                <ul className="space-y-2 text-sm text-cc-text-muted">
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Join for a specific mission</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Align on a shared vibe: tone, values, working style</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Build, learn, and gracefully dissolve or remix</span>
+                  </li>
+                </ul>
+              </article>
+              <article className="cc-card p-6">
+                <h3 className="text-xl font-semibold text-cc-text mb-3">Vibe as a first-class object</h3>
+                <p className="text-base text-cc-text-muted mb-4">
+                  Each Vibe Tribe explicitly defines tone, values, work style, and conflict norms—creating a VibeRoom that tools and protocols like ChatCard can use.
+                </p>
+                <div className="mt-4">
+                  <a href="/vibetribe" className="cc-btn cc-btn-primary">
+                    Design a Vibe Tribe
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="proofs" className="cc-section">
+          <div className="cc-section-inner space-y-10">
+            <div className="max-w-3xl space-y-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cc-text-muted">PROOFS & ANCHORING</p>
+              <h2 className="text-3xl font-semibold text-cc-text sm:text-4xl">Cryptographically sign your work</h2>
+              <p className="text-lg text-cc-text-muted">
+                Create cryptographic proofs that link you to your creations. Anchor them to public ledgers for permanent verification.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              <article className="cc-card p-6">
+                <h3 className="text-xl font-semibold text-cc-text mb-3">Sign artifacts</h3>
+                <p className="text-base text-cc-text-muted mb-4">
+                  Upload any file—images, documents, code—and create a cryptographic proof that links it to your ChatCard.
+                </p>
+                <ul className="space-y-2 text-sm text-cc-text-muted">
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Hash-based verification</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Authorship claims</span>
+                  </li>
+                </ul>
+              </article>
+              <article className="cc-card p-6">
+                <h3 className="text-xl font-semibold text-cc-text mb-3">Anchor proofs</h3>
+                <p className="text-base text-cc-text-muted mb-4">
+                  Anchor your proofs to public ledgers for permanent, verifiable timestamps and ownership records.
+                </p>
+                <ul className="space-y-2 text-sm text-cc-text-muted">
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Public verification</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Tamper-proof records</span>
+                  </li>
+                </ul>
+              </article>
+              <article className="cc-card p-6">
+                <h3 className="text-xl font-semibold text-cc-text mb-3">Share & verify</h3>
+                <p className="text-base text-cc-text-muted mb-4">
+                  Share proof URLs that anyone can verify. Embed proofs in your work for transparent attribution.
+                </p>
+                <ul className="space-y-2 text-sm text-cc-text-muted">
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Public proof pages</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cc-cyan" aria-hidden="true" />
+                    <span>Co-signature support</span>
+                  </li>
+                </ul>
+              </article>
+            </div>
+            <div className="flex justify-center">
+              <a href="/me/proof-studio" className="cc-btn cc-btn-primary">
+                Open Proof Studio
               </a>
             </div>
           </div>
