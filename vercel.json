@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm install && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
-  "outputDirectory": "apps/chatcard-web/.next",
-  "installCommand": "pnpm install",
+  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
+  "outputDirectory": ".next",
+  "installCommand": "cd ../.. && pnpm install",
   "framework": "nextjs",
   "rewrites": [
     {
@@ -41,6 +41,7 @@
     "app/api/**/*.ts": {
       "maxDuration": 30
     }
-  }
+  },
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ../.."
 }
 
