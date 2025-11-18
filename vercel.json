@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
+  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @chatcard/proof build && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
   "outputDirectory": ".next",
   "installCommand": "cd ../.. && pnpm install",
   "framework": "nextjs",

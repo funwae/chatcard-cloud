@@ -1,6 +1,6 @@
 // In production (Vercel), API is on same origin, so use empty string or relative paths
 // In development, use explicit URL
-import { API_URL } from './api-config.js';
+import { API_URL } from './api-config';
 
 export interface ApiError {
   error: string;

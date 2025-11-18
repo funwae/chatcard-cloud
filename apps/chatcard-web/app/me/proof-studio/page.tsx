@@ -59,7 +59,8 @@ export default function ProofStudioPage() {
 
       // Register proof with API
       try {
-        const { API_URL: apiUrl } = await import('@/lib/api-config');
+        const apiConfig = await import('@/lib/api-config');
+        const apiUrl = apiConfig.API_URL || '';
         await fetch(`${apiUrl}/api/proofs`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
