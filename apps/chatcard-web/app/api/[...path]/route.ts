@@ -23,16 +23,15 @@ async function getExpressHandler() {
   try {
     // Try to import from source (for Vercel build)
     // The path is relative to apps/chatcard-web/app/api/[...path]/route.ts
-    // Import from the API package
     // Path from apps/chatcard-web/app/api/[...path]/route.ts
-    // Up to apps/chatcard-web/app/api/[...path] (../../)
+    // Up to apps/chatcard-web/app/api/[...path] (../)
     // Up to apps/chatcard-web/app/api (../)
     // Up to apps/chatcard-web/app (../)
     // Up to apps/chatcard-web (../)
     // Up to apps (../)
     // Then into chatcard-api/src/serverless.js
-    // So: ../../../../chatcard-api/src/serverless.js
-    const module = await import('../../../../chatcard-api/src/serverless.js');
+    // So: ../../../chatcard-api/src/serverless.js
+    const module = await import('../../../chatcard-api/src/serverless.js');
     cachedHandler = module.handler;
     return cachedHandler;
   } catch (error) {

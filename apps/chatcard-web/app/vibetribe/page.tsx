@@ -297,7 +297,7 @@ export default function VibeTribePage() {
       <Header />
       <div className="min-h-screen bg-cc-bg">
         <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="mb-8">
+          <div className="mb-8">
           <h1 className="text-4xl font-bold text-cc-text mb-2">
             VibeTribe Designer
           </h1>
@@ -312,9 +312,9 @@ export default function VibeTribePage() {
               vibebible.org/vibetribe
             </a>.
           </p>
-        </div>
+          </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
           {/* Left: Form */}
           <div className="space-y-6">
             <div className="bg-cc-surface rounded-lg border border-cc-border p-6 space-y-4">
@@ -474,6 +474,7 @@ export default function VibeTribePage() {
               description="Ready-to-use prompt for LLMs"
               value={aiPrompt}
             />
+          </div>
           </div>
         </div>
       </div>
