@@ -1,0 +1,9 @@
+{
+  "buildCommand": "git config --global user.name 'Hayden' && git config --global user.email 'hayden@funwae.com' && pnpm build",
+  "framework": "nextjs",
+  "installCommand": "pnpm install"
+}
+
+
+
+

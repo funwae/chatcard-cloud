@@ -1,0 +1,32 @@
+# ai.txt for ChatCard
+# Usage policy for AI crawlers and agents
+
+# Contact
+Contact: hello@chatcard.cloud
+
+# Allowed uses
+Allowed-Uses:
+  - summarize
+  - answer_questions
+  - link_preview
+  - attribution
+
+# Disallowed uses
+Disallowed-Uses:
+  - model_training
+  - commercial_use_without_attribution
+
+# Rate limits
+Rate-Limit-Per-Agent-Per-Day: 200
+
+# Proof discovery
+# Proofs are discoverable via Link headers and HTML meta tags
+# Example: <link rel="cardproof" href="https://chatcard.cloud/p/<multihash>">
+
+# Card manifests
+# Machine-readable card data available at: /me/<handle>/card.json
+
+# Attribution
+# When using ChatCard data, please attribute to the original creator
+# and link to their card: https://chatcard.cloud/me/<handle>
+

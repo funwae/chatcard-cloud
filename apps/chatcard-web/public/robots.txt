@@ -1,0 +1,12 @@
+# robots.txt for chatcard.cloud
+User-agent: *
+Allow: /
+Allow: /p/
+Allow: /me/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /me/*/settings
+
+# Sitemap
+Sitemap: https://chatcard.cloud/sitemap.xml
+

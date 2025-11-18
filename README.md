@@ -1,103 +1,146 @@
-# ChatCard
+# ChatCard Monorepo
 
-A portable chat identity and interaction protocol. ChatCard is a portable chat card you can carry across apps and sites. It remembers how you talk, links to the AI provider you trust, and can click into "AI-enabled" content on the web.
+Monorepo for ChatCard Proofs (CC-Proof v1) implementation.
 
-## What is ChatCard?
+## Structure
 
-ChatCard is a portable chat card you can carry across apps and sites. It remembers how you talk, links to the AI provider you trust, and can click into "AI-enabled" content on the web.
+- `packages/chatcard-proof` - TypeScript SDK for signing/verifying/embedding proofs
+- `apps/chatcard-api` - Express API service (proof registry, proposals, keys)
+- `apps/chatcard-web` - Next.js web app (existing site + /me pages + Proof Studio)
 
-It's a card, not a full-screen app. It goes with you instead of being locked to one website. It can connect back to OpenAI / z.ai / whoever, so they can see real usage patterns (with your consent). Any page that speaks Carditecture can light up little "do this with your card" actions.
-
-## Features
-
-- **Portable Identity**: Carry your AI persona across apps and sites
-- **Provider Neutral**: Link to any AI provider you trust
-- **Scoped Permissions**: Control what AIs can do on each site
-- **Privacy First**: Your card, your data, your control
-
-## Getting Started
+## Setup
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 20+
+- pnpm 8+
+- PostgreSQL 14+
 
 ### Installation
 
 ```bash
-npm install
+# Install dependencies
+pnpm install
+
+# Generate Prisma client
+cd apps/chatcard-api
+pnpm db:generate
 ```
 
-### Development
+### Environment Variables
 
-Run the development server:
+Create `.env` files in each app:
+
+**apps/chatcard-api/.env:**
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/chatcard?schema=public"
+API_PORT=3001
+NODE_ENV=development
+CORS_ORIGIN=http://localhost:3002
+SESSION_SECRET=change-me-in-production
+JWT_SECRET=change-me-in-production
+RP_ID=localhost
+RP_ORIGIN=http://localhost:3002
+```
+
+**apps/chatcard-web/.env.local:**
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_APP_URL=http://localhost:3002
+```
+
+### Database Setup
 
 ```bash
-npm run dev
+cd apps/chatcard-api
+pnpm db:push  # For development
+# or
+pnpm db:migrate  # For production migrations
 ```
 
-Or run on a specific port (e.g., 3002):
+## Development
 
 ```bash
-npm run dev:3002
+# Run all apps in development
+pnpm dev:web  # Web app on :3002
+pnpm dev:api  # API on :3001
+
+# Or run individually
+cd apps/chatcard-web && pnpm dev:3002
+cd apps/chatcard-api && pnpm dev
 ```
 
-The app will be available at `http://localhost:3000` (or your specified port).
-
-### Build
-
-Build for production:
+## Building
 
 ```bash
-npm run build
+# Build all packages
+pnpm build
+
+# Build individual packages
+pnpm build:web
+pnpm build:api
+pnpm build:proof
 ```
 
-Start production server:
+## Quick Start (90 seconds)
 
-```bash
-npm start
-```
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
 
-## Project Structure
+2. **Set up database:**
+   ```bash
+   cd apps/chatcard-api
+   pnpm db:generate
+   pnpm db:push
+   ```
 
-```
-chatcard/
-├── app/              # Next.js app directory
-│   ├── connect/      # Connection flow pages
-│   ├── docs/         # Documentation pages
-│   └── examples/     # Example implementations
-├── components/       # React components
-│   ├── ChatCard.tsx  # Main ChatCard component
-│   └── ...
-├── hooks/           # React hooks
-├── lib/             # Library code (SDK)
-├── types/           # TypeScript type definitions
-└── public/          # Static assets
-```
+3. **Start services:**
+   ```bash
+   # Terminal 1: API
+   pnpm dev:api
+
+   # Terminal 2: Worker
+   cd apps/chatcard-api && pnpm dev:worker
+
+   # Terminal 3: Web
+   pnpm dev:web
+   ```
+
+4. **Visit:** http://localhost:3002
+
+See [GO_LIVE_CHECKLIST.md](./GO_LIVE_CHECKLIST.md) for production deployment checklist.
+
+## Project Status
+
+**Completed:**
+- ✅ WebAuthn passkey authentication
+- ✅ Magic link fallback
+- ✅ Agent JWT signing and verification
+- ✅ Co-signing support for proofs
+- ✅ Anchor provider system (BullMQ)
+- ✅ OpenAPI documentation
+- ✅ Security hardening (CORS, CSP, rate limiting)
+- ✅ User data export/delete (GDPR)
+
+**In Progress:**
+- 🔄 L2/L3 anchor provider implementations (stubs ready)
+- 🔄 PDF and Markdown canonicalization
+- 🔄 XMP, ID3, MP4 embedders
+- 🔄 Full test coverage
 
 ## Documentation
 
-- [ChatCard Protocol](./CHATCARD_PROTOCOL.md) - Technical specification
-- [Partner Guide](./PARTNER_GUIDE.md) - Integration guide for partners
-
-## Tech Stack
-
-- **Next.js 14** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **React 18** - UI library
+- [Go-Live Checklist](./GO_LIVE_CHECKLIST.md) - Production readiness checklist
+- [Setup Guide](./SETUP.md) - Detailed setup instructions
+- [Abuse & Support](./docs/ABUSE_AND_SUPPORT.md) - Reporting and support channels
+- [Backup & Restore](./docs/BACKUP_RESTORE.md) - Backup procedures and restore testing
+- [Grafana Setup](./docs/GRAFANA_SETUP.md) - Monitoring dashboard setup
+- [VibeTribe Integration](./docs/vibetribe/README.md) - VibeTribe module documentation
+- [API Documentation](./apps/chatcard-api/README.md) - API endpoint reference (TODO)
+- [SDK Documentation](./packages/chatcard-proof/README.md) - SDK usage guide (TODO)
 
 ## License
 
-[Add your license here]
-
-## Contributing
-
-[Add contribution guidelines here]
-
----
-
-**Powered by glyphd labs**
-
-Carditecture and the ChatCard protocol are research projects from glyphd labs, focused on cross-cultural AI and portable identity.
-
+Private - All rights reserved

@@ -1,0 +1,228 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  handle        String    @unique
+  did           String    @unique // did:cc:...
+  name          String?
+  email         String?   @unique
+  deletedAt     DateTime? // Soft delete timestamp
+  tosVersion    String?   // Terms of Service version accepted
+  tosAcceptedAt DateTime? // When ToS was accepted
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  keys      Key[]
+  proofs    Proof[]
+  proposals Proposal[]
+  items     CardItem[]
+  webauthnCredentials WebAuthnCredential[]
+  magicLinks MagicLink[]
+
+  @@index([handle])
+  @@index([did])
+  @@index([deletedAt])
+}
+
+model Key {
+  id            String   @id @default(cuid())
+  userId        String
+  publicKeyBase64 String // Ed25519 public key in base64
+  status        KeyStatus @default(ACTIVE)
+  createdAt     DateTime @default(now())
+  retiredAt     DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+}
+
+enum KeyStatus {
+  ACTIVE
+  RETIRED
+}
+
+model Proof {
+  multihash    String   @id // Multihash of the proof document
+  ownerDid     String
+  document     Json     // Full proof document JSON
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  owner        User?    @relation(fields: [ownerDid], references: [did], onDelete: SetNull)
+  anchor       Anchor?
+  cosignatures Cosignature[]
+
+  @@index([ownerDid])
+  @@index([createdAt])
+}
+
+model Proposal {
+  id          String         @id @default(cuid())
+  userId      String
+  title       String
+  url         String?
+  section     CardSection
+  authorship  Authorship
+  status      ProposalStatus @default(PENDING)
+  metadata    Json?          // Additional fields (tags, notes, etc.)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  expiresAt   DateTime?      // Auto-expire proposals
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([expiresAt])
+}
+
+enum ProposalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum CardSection {
+  CREATIONS
+  COLLABS
+  INSPIRED
+  CAPABILITIES
+  LINKS
+}
+
+enum Authorship {
+  MINE
+  COLLAB
+  REMIX
+  INSPIRED
+}
+
+model CardItem {
+  id          String      @id @default(cuid())
+  userId      String
+  section     CardSection
+  title       String
+  url         String?
+  authorship  Authorship
+  visibility  Visibility  @default(PUBLIC)
+  status      ItemStatus?
+  tags        String[]
+  license     String?
+  proofs      Json[]      // Array of proof objects
+  metadata    Json?       // Additional fields
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, section])
+  @@index([userId, visibility])
+}
+
+enum Visibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum ItemStatus {
+  SHIPPED
+  WIP
+  IDEA
+}
+
+model WebAuthnCredential {
+  id           String   @id // Base64URL credential ID
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  publicKey    String   // Base64URL public key
+  counter      Int      @default(0)
+  transports   String[] // ["usb", "nfc", "ble", "internal"]
+  aaguid       String?  // Authenticator AAGUID
+  createdAt    DateTime @default(now())
+  lastUsedAt   DateTime?
+
+  @@index([userId])
+  @@unique([id])
+}
+
+model Anchor {
+  id           String      @id @default(cuid())
+  proofMh      String      @unique
+  provider     String
+  state        AnchorState @default(QUEUED)
+  jobId        String?
+  txid         String?
+  createdAt    DateTime    @default(now())
+  postedAt     DateTime?
+  confirmedAt  DateTime?
+
+  proof Proof @relation(fields: [proofMh], references: [multihash], onDelete: Cascade)
+
+  @@index([state])
+}
+
+enum AnchorState {
+  QUEUED
+  POSTED
+  CONFIRMED
+  FAILED
+}
+
+model MagicLink {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  ipUaHash  String?  // Hash of IP + User-Agent for soft validation
+  createdAt DateTime @default(now())
+
+  @@index([tokenHash])
+  @@index([expiresAt])
+  @@index([userId, createdAt])
+}
+
+model AuthFailure {
+  id        String   @id @default(cuid())
+  email     String?
+  ipAddress String?
+  count     Int      @default(1)
+  lastAttempt DateTime @default(now())
+  createdAt DateTime @default(now())
+  expiresAt DateTime // Auto-cleanup after 1 hour
+
+  @@index([email])
+  @@index([ipAddress])
+  @@index([expiresAt])
+}
+
+model Cosignature {
+  id          String   @id @default(cuid())
+  proofMh     String
+  cosignerDid String
+  signature   String   // base64url
+  algorithm   String   @default("Ed25519")
+  createdAt   DateTime @default(now())
+
+  proof Proof @relation(fields: [proofMh], references: [multihash], onDelete: Cascade)
+
+  @@index([proofMh])
+  @@index([cosignerDid])
+  @@unique([proofMh, cosignerDid])
+}
+

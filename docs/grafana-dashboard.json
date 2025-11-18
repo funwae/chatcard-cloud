@@ -1,0 +1,232 @@
+{
+  "dashboard": {
+    "title": "ChatCard API Dashboard",
+    "tags": ["chatcard", "api", "production"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "API Request Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{method}} {{route}}"
+          }
+        ],
+        "yaxes": [{"format": "reqps", "label": "Requests/sec"}]
+      },
+      {
+        "id": 2,
+        "title": "API Latency (p95)",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "p99"
+          }
+        ],
+        "yaxes": [{"format": "s", "label": "Latency"}],
+        "alert": {
+          "name": "High API Latency",
+          "message": "API p95 latency exceeds 300ms",
+          "conditions": [
+            {
+              "evaluator": {"params": [0.3], "type": "gt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "last"},
+              "type": "query"
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "title": "Error Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "5xx errors"
+          },
+          {
+            "expr": "rate(http_requests_total{status=~\"4..\"}[5m])",
+            "legendFormat": "4xx errors"
+          }
+        ],
+        "yaxes": [{"format": "reqps", "label": "Errors/sec"}],
+        "alert": {
+          "name": "High Error Rate",
+          "message": "5xx error rate exceeds 1%",
+          "conditions": [
+            {
+              "evaluator": {"params": [0.01], "type": "gt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "mean"},
+              "type": "query"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "title": "Anchor Jobs by State",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+        "targets": [
+          {
+            "expr": "anchor_jobs_total{state=\"queued\"}",
+            "legendFormat": "Queued"
+          },
+          {
+            "expr": "anchor_jobs_total{state=\"posted\"}",
+            "legendFormat": "Posted"
+          },
+          {
+            "expr": "anchor_jobs_total{state=\"confirmed\"}",
+            "legendFormat": "Confirmed"
+          },
+          {
+            "expr": "anchor_jobs_total{state=\"failed\"}",
+            "legendFormat": "Failed"
+          }
+        ],
+        "yaxes": [{"format": "short", "label": "Count"}],
+        "alert": {
+          "name": "Anchor Failures Spike",
+          "message": "Anchor job failures increased significantly",
+          "conditions": [
+            {
+              "evaluator": {"params": [10], "type": "gt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "delta"},
+              "type": "query"
+            }
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "title": "Magic Link Metrics",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+        "targets": [
+          {
+            "expr": "magiclink_requests_total",
+            "legendFormat": "Total Requests"
+          },
+          {
+            "expr": "magiclink_used_total",
+            "legendFormat": "Used"
+          },
+          {
+            "expr": "magiclink_expired_total",
+            "legendFormat": "Expired"
+          }
+        ],
+        "yaxes": [{"format": "short", "label": "Count"}]
+      },
+      {
+        "id": 6,
+        "title": "Co-signatures & Proofs",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+        "targets": [
+          {
+            "expr": "cosign_requests_total",
+            "legendFormat": "Co-signatures"
+          },
+          {
+            "expr": "proofs_total",
+            "legendFormat": "Total Proofs"
+          }
+        ],
+        "yaxes": [{"format": "short", "label": "Count"}]
+      },
+      {
+        "id": 7,
+        "title": "Queue Depth",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24},
+        "targets": [
+          {
+            "expr": "anchor_jobs_total{state=\"queued\"}",
+            "legendFormat": "Queued Jobs"
+          }
+        ],
+        "yaxes": [{"format": "short", "label": "Jobs"}]
+      },
+      {
+        "id": 8,
+        "title": "Redis Connection",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 24},
+        "targets": [
+          {
+            "expr": "redis_up",
+            "legendFormat": "Redis"
+          }
+        ],
+        "alert": {
+          "name": "Redis Disconnected",
+          "message": "Redis connection lost",
+          "conditions": [
+            {
+              "evaluator": {"params": [1], "type": "lt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "last"},
+              "type": "query"
+            }
+          ]
+        }
+      },
+      {
+        "id": 9,
+        "title": "Database Connection",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 24},
+        "targets": [
+          {
+            "expr": "postgres_up",
+            "legendFormat": "Postgres"
+          }
+        ],
+        "alert": {
+          "name": "Database Connection Error",
+          "message": "Postgres connection lost",
+          "conditions": [
+            {
+              "evaluator": {"params": [1], "type": "lt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "last"},
+              "type": "query"
+            }
+          ]
+        }
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": ["10s", "30s", "1m", "5m", "15m", "30m", "1h"]
+    }
+  }
+}
+
