@@ -93,7 +93,7 @@ export async function sign(
 export async function verify(
   resourceUrl: string,
   resourceContent?: Uint8Array | string
-): Promise<{ valid: boolean; tier: string; ownerDid?: string; authorship?: string; error?: string }> {
+): Promise<{ valid: boolean; tier: string; ownerDid?: string; authorship?: string; error?: string; anchors?: any[] }> {
   // Discover proof URL
   const proofUrl = await discoverProofUrl(resourceUrl);
   if (!proofUrl) {
@@ -132,7 +132,15 @@ export async function verify(
     }
 
   // Verify proof
-  return verifyProof(proof, resourceContent);
+  const result = await verifyProof(proof, resourceContent);
+  // Ensure return type matches expected signature
+  return {
+    valid: result.valid,
+    tier: result.tier,
+    ownerDid: result.ownerDid,
+    authorship: result.authorship,
+    error: result.error,
+  };
 }
 
 // Re-export embed functions
