@@ -7,12 +7,12 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     // Allow importing from parent directories
     config.resolve.symlinks = false;
-    
+
     // Add alias for easier imports
     if (!config.resolve.alias) {
       config.resolve.alias = {};
     }
-    
+
     return config;
   },
 }

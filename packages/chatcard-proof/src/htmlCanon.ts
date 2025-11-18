@@ -1,5 +1,9 @@
 import { parse, serialize } from 'parse5';
-import type { Document, Element, TextNode, CommentNode } from 'parse5/dist/tree-adapters/default';
+// Types are available from parse5 directly in v7
+type Document = any;
+type Element = any;
+type TextNode = any;
+type CommentNode = any;
 
 /**
  * Canonicalize HTML content according to cc-html-1 rules:

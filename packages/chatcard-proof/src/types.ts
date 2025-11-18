@@ -48,6 +48,7 @@ export const ProofDocumentSchema = z.object({
   claim: ClaimSchema,
   signature: SignatureBlockSchema,
   anchors: z.array(AnchorSchema).optional(),
+  cosignatures: z.array(SignatureBlockSchema).optional(), // Optional co-signatures for L4
 });
 
 export type ProofDocument = z.infer<typeof ProofDocumentSchema>;

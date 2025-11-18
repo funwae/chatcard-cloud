@@ -19,7 +19,7 @@ async function getExpressHandler() {
   if (cachedHandler) {
     return cachedHandler;
   }
-  
+
   try {
     // Try to import from source (for Vercel build)
     // The path is relative to apps/chatcard-web/app/api/[...path]/route.ts
@@ -93,7 +93,7 @@ async function handleRequest(request: NextRequest, path: string[]) {
 
     // Call the serverless handler
     const result = await handler(event as any, context as any);
-    
+
     // Convert response
     const headers = new Headers();
     if (result.headers) {

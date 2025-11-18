@@ -1,6 +1,7 @@
-import { sign as ed25519Sign } from '@noble/ed25519';
+import { sign as ed25519Sign, getPublicKey } from '@noble/ed25519';
 import { sha256 } from 'multiformats/hashes/sha2';
-import { encode as multihashEncode } from 'multiformats/hashes/digest';
+import { encode } from 'multiformats/block';
+import { bytes } from 'multiformats';
 import type { ProofDocument, ResourceDescriptor, Claim, Authorship, Visibility } from './types.js';
 import { canonicalize, sha256Base64 } from './canon.js';
 import { discoverProofUrl, verifyProof } from './verify.js';
@@ -59,7 +60,7 @@ export async function sign(
   const messageToSign = JSON.stringify(proofDoc);
   const messageBytes = new TextEncoder().encode(messageToSign);
   const signatureBytes = await ed25519Sign(messageBytes, privateKey);
-  const publicKeyBytes = await ed25519Sign.getPublicKey(privateKey);
+  const publicKeyBytes = getPublicKey(privateKey);
 
   // Create signature block
   const signature = {
@@ -78,7 +79,12 @@ export async function sign(
   // Generate multihash of the proof document
   const proofBytes = new TextEncoder().encode(JSON.stringify(proof));
   const hashDigest = await sha256.digest(proofBytes);
-  const multihash = multihashEncode(hashDigest.code, hashDigest.digest).toString('base64url');
+  // Create multihash bytes: code (1 byte) + length (1 byte) + digest
+  const multihashBytes = new Uint8Array(2 + hashDigest.digest.length);
+  multihashBytes[0] = hashDigest.code;
+  multihashBytes[1] = hashDigest.digest.length;
+  multihashBytes.set(hashDigest.digest, 2);
+  const multihash = Buffer.from(multihashBytes).toString('base64url');
 
   return { proof, multihash };
 }
@@ -110,21 +116,22 @@ export async function verify(
     };
   }
 
-  const proof: ProofDocument = await proofResponse.json();
+  const proofData = await proofResponse.json();
+  const proof: ProofDocument = proofData as ProofDocument;
 
-  // If content not provided, fetch it
-  if (!resourceContent) {
-    const contentResponse = await fetch(resourceUrl);
-    if (!contentResponse.ok) {
-      return {
-        valid: false,
-        tier: 'L1',
-        error: `Failed to fetch resource: ${contentResponse.statusText}`,
-      };
+    // If content not provided, fetch it
+    if (!resourceContent) {
+      const contentResponse = await fetch(resourceUrl);
+      if (!contentResponse.ok) {
+        return {
+          valid: false,
+          tier: 'L1',
+          error: `Failed to fetch resource: ${contentResponse.statusText}`,
+        };
+      }
+      const arrayBuffer = await contentResponse.arrayBuffer();
+      resourceContent = new Uint8Array(arrayBuffer);
     }
-    resourceContent = await contentResponse.arrayBuffer();
-    resourceContent = new Uint8Array(resourceContent);
-  }
 
   // Verify proof
   return verifyProof(proof, resourceContent);
