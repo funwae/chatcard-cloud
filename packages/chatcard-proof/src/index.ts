@@ -1,7 +1,5 @@
 import { sign as ed25519Sign, getPublicKey } from '@noble/ed25519';
 import { sha256 } from 'multiformats/hashes/sha2';
-import { encode } from 'multiformats/block';
-import { bytes } from 'multiformats';
 import type { ProofDocument, ResourceDescriptor, Claim, Authorship, Visibility } from './types.js';
 import { canonicalize, sha256Base64 } from './canon.js';
 import { discoverProofUrl, verifyProof } from './verify.js';
