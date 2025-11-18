@@ -43,7 +43,8 @@ async function handleRequest(request: NextRequest, path: string[]) {
   try {
     const handler = await getExpressHandler();
     const url = new URL(request.url);
-    const pathname = `/${path.join('/')}`;
+    // Handle empty path array (root API route)
+    const pathname = path.length > 0 ? `/${path.join('/')}` : '/';
 
     // Read body if present
     let body: string | undefined;
