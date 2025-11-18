@@ -1,10 +1,8 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm install && pnpm --filter @chatcard/api db:generate && cd apps/chatcard-web && pnpm build",
+  "buildCommand": "pnpm install && pnpm --filter @chatcard/api db:generate && pnpm --filter @chatcard/web build",
   "outputDirectory": "apps/chatcard-web/.next",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "rootDirectory": "apps/chatcard-web",
   "rewrites": [
     {
       "source": "/p/:path*",
@@ -39,9 +37,6 @@
     "app/api/**/*.ts": {
       "maxDuration": 30
     }
-  },
-  "env": {
-    "NODE_ENV": "production"
   }
 }
 
