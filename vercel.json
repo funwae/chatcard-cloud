@@ -31,6 +31,10 @@
     {
       "source": "/metrics",
       "destination": "/api/metrics"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     }
   ],
   "functions": {

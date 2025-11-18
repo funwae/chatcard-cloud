@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePasskeyLogin } from '@/hooks/usePasskey';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { API_URL } from '@/lib/api-config';
 
 export default function LoginPage() {
   const router = useRouter();

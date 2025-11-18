@@ -7,7 +7,7 @@ import type {
   PublicKeyCredentialRequestOptionsJSON,
 } from '@simplewebauthn/browser';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { API_URL } from '@/lib/api-config';
 
 export function usePasskeyRegistration() {
   const [loading, setLoading] = useState(false);

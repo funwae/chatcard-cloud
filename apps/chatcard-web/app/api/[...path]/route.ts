@@ -13,13 +13,28 @@ export const maxDuration = 30;
 
 // For Vercel deployment, import the serverless handler from source
 // Vercel will bundle this during the build process
+let cachedHandler: any = null;
+
 async function getExpressHandler() {
+  if (cachedHandler) {
+    return cachedHandler;
+  }
+  
   try {
+    // Try to import from source (for Vercel build)
+    // The path is relative to apps/chatcard-web/app/api/[...path]/route.ts
     const module = await import('../../../../chatcard-api/src/serverless.js');
-    return module.handler;
+    cachedHandler = module.handler;
+    return cachedHandler;
   } catch (error) {
     console.error('Failed to load Express handler:', error);
-    throw error;
+    // Return a fallback handler that returns an error
+    cachedHandler = async () => ({
+      statusCode: 503,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'API handler not available', details: error instanceof Error ? error.message : 'Unknown error' }),
+    });
+    return cachedHandler;
   }
 }
 
@@ -68,7 +83,7 @@ async function handleRequest(request: NextRequest, path: string[]) {
 
     // Call the serverless handler
     const result = await handler(event as any, context as any);
-
+    
     // Convert response
     const headers = new Headers();
     if (result.headers) {
@@ -81,7 +96,19 @@ async function handleRequest(request: NextRequest, path: string[]) {
       });
     }
 
-    return new Response(result.body || '', {
+    // Handle different response body types
+    let responseBody: string | ReadableStream | null = null;
+    if (result.body) {
+      if (typeof result.body === 'string') {
+        responseBody = result.body;
+      } else if (result.body instanceof ReadableStream) {
+        responseBody = result.body;
+      } else {
+        responseBody = JSON.stringify(result.body);
+      }
+    }
+
+    return new Response(responseBody || '', {
       status: result.statusCode || 200,
       headers,
     });

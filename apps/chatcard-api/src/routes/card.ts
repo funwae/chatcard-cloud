@@ -34,21 +34,24 @@ cardRouter.get('/:handle/card.json', async (req, res) => {
       links: [],
     };
 
-    for (const item of user.items) {
-      const sectionKey = item.section.toLowerCase() as keyof typeof sections;
-      if (sections[sectionKey]) {
-        sections[sectionKey].push({
-          id: item.id,
-          title: item.title,
-          url: item.url,
-          authors: [user.did], // TODO: Extract from metadata if collab
-          authorship: item.authorship,
-          status: item.status,
-          tags: item.tags,
-          license: item.license,
-          proofs: item.proofs,
-          visibility: item.visibility,
-        });
+    // Safely iterate over items (handle case where items might be undefined)
+    if (user.items && Array.isArray(user.items)) {
+      for (const item of user.items) {
+        const sectionKey = item.section.toLowerCase() as keyof typeof sections;
+        if (sections[sectionKey]) {
+          sections[sectionKey].push({
+            id: item.id,
+            title: item.title,
+            url: item.url,
+            authors: [user.did], // TODO: Extract from metadata if collab
+            authorship: item.authorship,
+            status: item.status,
+            tags: item.tags,
+            license: item.license,
+            proofs: item.proofs,
+            visibility: item.visibility,
+          });
+        }
       }
     }
 
@@ -82,7 +85,7 @@ cardRouter.get('/:handle/card.json', async (req, res) => {
         agent: {
           inbox: `/api/me/proposals`,
           events: `/api/me/events`,
-          pubkey: user.keys[0]?.publicKeyBase64 || undefined,
+          pubkey: (user.keys && user.keys.length > 0) ? user.keys[0]?.publicKeyBase64 : undefined,
         },
         updated_at: user.updatedAt.toISOString().split('T')[0],
       },
